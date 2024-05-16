@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Quiz</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f2f2f2;
+    }
+    #container {
+        width: 50%;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        margin-top: 0;
+    }
+    .btn {
+        display: inline-block;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+    }
+    .btn:hover {
+        background-color: #0056b3;
+    }
+    #image {
+        margin-top: 20px;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <h1>Mini Quiz</h1>
+    <div id="question"></div>
+    <div id="result"></div>
+    <button class="btn" onclick="speakQuestion()">Volgende vraag</button>
+    <button id="answerBtn" class="btn" style="display: none;" onclick="listenForAnswer()">Antwoord geven</button>
+    <div id="image"></div>
+</div>
+
+<script>
+
+const questions = [
+    { question: "Wat is de hoofdstad van Frankrijk?", answer: "Parijs", image: "images/parijs.jpg" },
+    { question: "Wat is de hoofdstad van Duitsland?", answer: "Berlijn", image: "images/berlijn.jpg" },
+    { question: "Wat is de hoofdstad van Spanje?", answer: "Madrid", image: "images/madrid.jpg" },
+    { question: "Wat is de hoofdstad van Italië?", answer: "Rome", image: "images/rome.jpg" },
+    { question: "Wat is de hoofdstad van Nederland?", answer: "Amsterdam", image: "images/amsterdam.jpg" },
+    { question: "Wat is de hoofdstad van België?", answer: "Brussel", image: "images/brussel.jpg" },
+    { question: "Wat is de hoofdstad van Engeland?", answer: "Londen", image: "images/london.jpg" },
+    { question: "Wat is de hoofdstad van Zwitserland?", answer: "Bern", image: "images/bern.jpg" },
+    { question: "Wat is de hoofdstad van Zweden?", answer: "Stockholm", image: "images/stockholm.jpg" },
+    { question: "Wat is de hoofdstad van Noorwegen?", answer: "Oslo", image: "images/oslo.jpg" },
+    
+];
+
+let currentQuestionIndex = 0;
+let recognition; 
+
+
+function speakQuestion() {
+    const question = questions[currentQuestionIndex].question;
+    const speech = new SpeechSynthesisUtterance(question);
+    window.speechSynthesis.speak(speech);
+    document.getElementById('answerBtn').style.display = 'block'; 
+    document.getElementById('image').innerHTML = ''; 
+}
+
+
+function listenForAnswer() {
+    recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+    recognition.lang = 'nl-NL'; 
+    recognition.start();
+
+    recognition.onresult = function(event) {
+        const userAnswer = event.results[0][0].transcript.trim();
+        checkAnswer(userAnswer);
+        recognition.stop(); 
+    };
+
+    recognition.onerror = function(event) {
+        console.error('Fout bij spraakherkenning:', event.error);
+    };
+}
+
+
+function checkAnswer(userAnswer) {
+    const correctAnswer = questions[currentQuestionIndex].answer;
+    const resultDiv = document.getElementById('result');
+
+    if (userAnswer.toLowerCase() === correctAnswer.toLowerCase()) {
+        resultDiv.innerHTML = "<span style='color: green;'>Correct!</span>";
+    } else {
+        resultDiv.innerHTML = "<span style='color: red;'>Fout.</span> Het juiste antwoord is: " + correctAnswer;
+    }
+
+   
+    const imageDiv = document.getElementById('image');
+    const image = document.createElement('img');
+    image.src = questions[currentQuestionIndex].image;
+    image.alt = 'Afbeelding';
+    image.style.maxWidth = '100%';
+    imageDiv.appendChild(image);
+
+    
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        document.getElementById('answerBtn').style.display = 'none'; 
+    } else {
+        resultDiv.innerHTML += "<br>Quiz is afgelopen.";
+        currentQuestionIndex = 0; 
+    }
+}
+</script>
+</body>
+</html>
