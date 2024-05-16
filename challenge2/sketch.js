@@ -76,7 +76,7 @@ function draw() {
     textAlign(CENTER, CENTER);
     text('Game Over', width / 2, height / 2 - 50);
     textSize(24);
-    text('Score: ' + score, width / 2, height / 2);
+    text('Score: ' + score, width / 2 +5, height / 2);
     
     fill(0, 100, 255);
     rectMode(CENTER);
