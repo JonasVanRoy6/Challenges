@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motion Maze Game</title>
+    <link rel="stylesheet" href="challenge4.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="container">
+        <h1>Doolhof</h1>
+        <p>gebruik je mobiele apparaat om het rode bolletje te bewegen, Telkens je tegen de rand komt zal je opnieuw moeten beginnen. Probeer het groene blokje te bereiken!<br>(tip bij oriëntatie van het toestel is display up het makkelijkste)</p>
+    <div id="maze">
+        <div id="ball"></div>
+        <!-- buiten muren -->
+        <div class="wall" style="top: 0; left: 0; width: 100%; height: 20px;"></div>
+        <div class="wall" style="top: 0; left: 0; width: 20px; height: 100%;"></div>
+        <div class="wall" style="top: 0; right: 0; width: 20px; height: 100%;"></div>
+        <div class="wall" style="bottom: 0; left: 0; width: 100%; height: 20px;"></div>
+        
+        <!-- binnen muren -->
+        <div class="wall" style="top: 100px; left: 20px; width: 100px; height: 20px;"></div>
+        <div class="wall" style="top: 100px; left: 160px; width: 240px; height: 20px;"></div>
+        <div class="wall" style="top: 150px; left: 60px; width: 20px; height: 100px;"></div>
+        <div class="wall" style="top: 50px; left: 100px; width: 20px; height: 60px;"></div>
+        <div class="wall" style="top: 50px; left: 160px; width: 20px; height: 50px;"></div>
+        <div class="wall" style="top: 120px; left: 160px; width: 20px; height: 100px;"></div>
+        <div class="wall" style="top: 220px; left: 320px; width: 20px; height: 80px;"></div>
+        <div class="wall" style="top: 150px; left: 180px; width: 160px; height: 20px;"></div>
+        <div class="wall" style="top: 50px; left: 160px; width: 160px; height: 20px;"></div>
+        <div class="wall" style="top: 150px; left: 80px; width: 40px; height: 20px;"></div>
+        <div class="wall" style="top: 280px; left: 80px; width: 260px; height: 20px;"></div>
+        <div class="wall" style="top: 220px; left: 160px; width: 180px; height: 20px;"></div>
+        <div class="wall" style="top: 220px; left: 60px; width: 20px; height: 120px;"></div>
+        <div class="wall" style="top: 330px; left: 60px; width: 280px; height: 20px;"></div>
+        
+        <!-- groen blokje -->
+        <div class="goal" style="top: 60px; left: 340px; width: 40px; height: 40px;"></div>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>
